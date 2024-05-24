@@ -1,0 +1,320 @@
+\subsection{Análise exploratória}
+\subsubsection{Quantidade de Órgãos Julgadores}
+
+A Tabela \ref{tbl:tribunais_qtd_ojs} exibe a quantidade de órgãos julgadores por tribunal.
+
+\begin{table}[ht]
+\centering
+\caption{Quantidade de órgãos julgadores por tribunal}
+\begin{tabular}{c c|cc}
+  \hline
+ Tribunal & Estado & Frequência & Porcentagem \\ 
+   \hline
+  TRT2 & SP & 319 & 14,23\% \\ 
+  TRT1 & RJ & 222 & 9,91\% \\ 
+  TRT15 & SP & 218 & 9,73\% \\ 
+  TRT3 & MG & 210 & 9,37\% \\ 
+  TRT4 & RS & 190 & 8,48\% \\ 
+  TRT9 & PR & 140 & 6,25\% \\ 
+  TRT5 & BA & 111 & 4,95\% \\ 
+  TRT6 & PE &  97 & 4,33\% \\ 
+  TRT12 & SC &  86 & 3,84\% \\ 
+  TRT8 & AP e PA &  77 & 3,44\% \\ 
+  TRT18 & GO &  64 & 2,86\% \\ 
+  TRT7 & CE &  56 & 2,5\% \\ 
+  TRT10 & DF e TO &  55 & 2,45\% \\ 
+  TRT11 & AM e RR &  48 & 2,14\% \\ 
+  TRT23 & MT &  45 & 2,01\% \\ 
+  TRT13 & PB &  43 & 1,92\% \\ 
+  TRT14 & AC e RO &  41 & 1,83\% \\ 
+  TRT17 & ES &  41 & 1,83\% \\ 
+  TRT24 & MS &  39 & 1,74\% \\ 
+  TRT21 & RN &  35 & 1,56\% \\ 
+  TRT19 & AL &  31 & 1,38\% \\ 
+  TRT16 & MA &  26 & 1,16\% \\ 
+  TRT22 & PI &  24 & 1,07\% \\ 
+  TRT20 & SE &  23 & 1,03\% \\
+  \hline
+  \textbf{Total} & \textbf{Nacional} & 2.241 & 100\% \\ \hline
+\end{tabular}
+\label{tbl:tribunais_qtd_ojs}
+\end{table}
+
+Dos tribunais trabalhistas, o que conta com maior representação em quantidade de órgãos julgadores é o TRT2, com pouco mais de 13\% do total nacional. Dois dos tribunais trabalhistas com mais órgãos julgadores são pertencentes ao estado de São Paulo, correspondendo, juntos, a quase 25\% do total nacional. O estado de São Paulo é, também, a única unidade federativa com dois tribunais da Justiça do Trabalho.
+
+Há quatro tribunais da Justiça do Trabalho que possuem jurisdição em mais de uma Unidade da Federação (UF): TRT8, TRT10, TRT11 e TRT14. Todos esses se restringem a operar em duas UFs cada.
+
+A diferença entre os tribunais para cada ranking decresce de forma suave, sem nenhum grande salto entre um colocado e seu posterior ou anterior. O ramo trabalhista conta com um total de 2.241 órgãos julgadores.
+
+
+\subsubsection{Distribuição dos tempos}
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição dos tempos até a baixa}
+    \includegraphics[scale=.85]{imagens/dist_tempo.pdf}
+\end{figure}
+
+Dado que se trata do tempo entre uma situação e outra posterior à primeira, todos os valores observados são não-negativos. A maior parte dos processos leva até 2.000 dias para receber baixa. 
+
+A distribuição dos tempos é assimétrica à direita, quase que rigorosamente decrescente. Esse comportamento, por sua vez, não se assemelha ao comportamento de uma distribuição normal, que é simétrica e possui valores negativos com probabilidade não-nula.
+
+Devido à quantidade excessiva de observações, foram feitas 10 amostras aleatórias simples de tamanho 500 sem reposição, e aplicado, para cada, o teste de normalidade de Shapiro-Wilk sob nível de significância de 5\%. As hipóteses foram:
+
+$\begin{cases}
+H_{0}: \mbox{O tempo até a baixa segue distribuição Normal.} \\
+H_{1}: \mbox{O tempo até a baixa não segue distribuição Normal.}  \\
+\end{cases}
+$\\
+
+\begin{table}[H]
+\centering
+\caption{Teste de normalidade de Shapiro-Wilk para amostras do tempo até a baixa}
+\begin{tabular}{ccc}
+\hline
+\textbf{Variáveis} & \textbf{P-valor máximo} & \textbf{Decisão do teste} \\ \hline
+Tempo até a baixa & $\approx 0$   & Rejeita $H_0$  \\ \hline  
+\end{tabular}
+\label{teste:normalidade_tempo}
+\end{table}
+
+A Tabela \ref{teste:normalidade_tempo} mostra que mesmo o maior p-valor obtido ainda foi próximo de zero. Para todos os testes, a hipótese de normalidade do tempo até a baixa de um processo foi rejeitada, apresentando, assim, evidências de que sua distribuição não é normal.
+
+
+\subsubsection{Formato dos processos}
+O Conselho Nacional de Justiça instituiu o Processo Judicial Eletrônico (PJe) como forma de tornar o Poder Judiciário mais célere \cite{pje}. A comparação entre os formatos de processos é relevante, não só pela predição do tempo até a baixa, mas também para observar se os resultados da instituição do PJe correspondem aos esperados pelas instituições de justiça.
+
+Espera-se que a quantidade de casos novos físicos diminua progressivamente ao longo do tempo, até se aproximar de zero. A Figura \ref{fig:pct_fisicos_tempo} mostra essa evolução de janeiro 2021 até janeiro de 2024.
+
+\begin{figure}[H]
+    \centering
+    \caption{Evolução da frequência relativa de casos novos físicos ao longo do tempo}
+    \includegraphics[scale=.87]{imagens/pct_fisicos_tempo.pdf}
+    \label{fig:pct_fisicos_tempo}
+\end{figure}
+
+A Figura \ref{fig:pct_fisicos_tempo} mostra uma tendência geral de queda. A frequência relativa de casos novos físicos já era de apenas 0,06\% em 2021, e seguiu em queda, chegando a valores muito próximos de zero no começo de 2024.
+
+A Figura \ref{fig:pct_fisicos_tramitando_tempo} mostra a evolução da frequência de processos físicos pendentes tramitando ao longo dos últimos anos.
+
+\begin{figure}[H]
+    \centering
+    \caption{Evolução da frequência relativa de processos pendentes tramitando em formato físico ao longo do tempo}
+    \includegraphics[scale=.85]{imagens/pct_fisicos_tramitando_tempo.pdf}
+    \label{fig:pct_fisicos_tramitando_tempo}
+\end{figure}
+
+A frequência de processos físicos tramitando permanece relativamente estável e acima de 1\%, apesar de o número de casos novos físicos cair em ritmo acelerado. A discrepância mostra que a maior parte destes processos eletrônicos pendentes não foi iniciada durante o período, sugerindo que os processos com formato físico podem chegar a durar vários anos. A baixa frequência de processos físicos em tramitação também indica que essa variável se trata de um fenômeno raro, em especial durante o período.
+
+A Figura \ref{fig:formato_tempo} mostra a distribuição dos tempos entre o início do processo e a data de referência para cada um dos formatos, onde há processos ainda ativos. Foram omitidos quaisquer processos para os quais o formato era indisponível.
+
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição dos tempos de tramitação dos processos para cada formato em processos ainda ativos}
+    \includegraphics[scale=.93]{imagens/formato_tempo.pdf}
+    \label{fig:formato_tempo}
+\end{figure}
+
+A Figura \ref{fig:formato_tempo} mostra uma discrepância grande de magnitude entre os tempos de processos físicos e eletrônicos. Cerca de 50\% dos processos físicos tramitando possuem tempo de tramitação próxima ou maior que seis anos.
+
+Além da clara diferença no tempo entre os formatos, há uma variabilidade muito menor dos processos eletrônicos em relação aos processos físicos, que indica que os processos eletrônicos podem ter predições mais precisas.
+
+A diferença sugere que o PJe, de fato, tornou os processos mais céleres, conforme as expectativas do Conselho Nacional de Justiça.
+
+
+\subsubsection{Graus de jurisdição\label{sec:graus}}
+O Poder Judiciário é hierarquizado por três graus de jurisdição: o Primeiro Grau, o Segundo Grau e os Tribunais Superiores. O Primeiro Grau, por sua vez, é também o grau com maior carga processual, fato que motivou a instauração da Política Nacional de Priorização do Primeiro Grau, equilibrando orçamento e pessoal entre os graus segundo suas demandas \cite{justicaemnumeros}.
+
+A Figura \ref{fig:grau_tempo} mostra a distribuição dos tempos até a baixa para o primeiro e segundo graus de jurisdição. Foi feito um corte no eixo Y para evitar que os outliers prejudiquem a visualização.
+
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição dos tempos até a baixa dos processos para o primeiro e o segundo graus de jurisdição}
+    \includegraphics[scale=1]{imagens/grau_tempo.pdf}
+    \label{fig:grau_tempo}
+\end{figure}
+
+Os tempos até a baixa de um processo são consistentemente menores para o segundo grau, quando comparados com o primeiro. De fato, a discrepância que o Relatório Justiça em Números aponta entre o Primeiro Grau e os outros graus de jurisdição ainda é refletida nos indicadores, tornando o grau uma variável candidata relevante para a predição dos tempos.
+
+\subsubsection{Recursos\label{sec:recursos}}
+A primeira decisão judicial sobre um processo é tomada em sua competência originária. Em caso de impugnação de alguma das partes envolvidas no processo, é aberto um recurso para revisar a decisão. O eixo Y foi cortado para evitar prejuízo à visualização devido aos outliers.
+
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição dos tempos até a baixa dos processos originários e recursais}
+   \includegraphics[scale=1]{imagens/originario.pdf}
+    \label{fig:originario}
+\end{figure}
+
+A Figura \ref{fig:originario} mostra uma diferença de dispersão e de magnitude, onde não só os recursos são mais céleres, como também são concentrados em um intervalo menor.
+
+Ainda, o comportamento dos processos originários e recursais é muito parecido com o comportamento dos processos de primeiro e segundo grau, o que pode indicar associação entre as variáveis. Essa possível associação será discutida na Seção \ref{sec:associacoes_vars}.
+
+
+\subsubsection{Associação entre as variáveis qualitativas\label{sec:associacoes_vars}}
+Foi observada uma semelhança entre os tempos até a baixa nos gráficos da Seção \ref{sec:recursos} e a Seção \ref{sec:graus}.  A Tabela \ref{tbl:originario_grau} investiga as frequências cruzadas de ocorrências de cada grau e nível de recurso.
+
+\begin{table}[H]
+\centering
+\caption{Frequência de processos pendentes cruzada por grau e recursos}
+\begin{tabular}{c|cc|c}
+\hline
+\multirow{2}{*}{\textbf{Grau}} & \multicolumn{2}{c|}{\textbf{Originário}} & \multirow{2}{*}{\textbf{Total}} \\ 
+\cline{2-3}
+ & Sim & Não \\ 
+  \hline
+1º & 5.284.459 &   0  & 5.284.459 \\ 
+2º & 113.080 & 670.461 & 783.541 \\ 
+   \hline
+  Total & 5.397.539 & 670.461 & 6.068.000 \\ 
+\hline
+\end{tabular}
+\label{tbl:originario_grau}
+\end{table}
+
+Olhando através dos níveis de recurso, é perceptível que a maior parte das ocorrências originários está compreendida em primeiro grau, bem como a maior parte das ocorrências não-originárias está compreendida em segundo grau. Dentre os processos de segundo grau, há cerca de seis vezes mais processos recursais do que processos originários, e nenhum dos processos recursais observados no período pertence ao primeiro grau.
+
+Visando investigar possíveis outras associações, serão aplicados testes de associação entre as variáveis qualitativas. A Tabela \ref{tbl:assoc_categoricas} exibe o resultado dos testes bivariados de independência para procedimento, grau, originário e formato.
+
+O teste exato de Fisher foi aplicado em todas as tabelas 2x2. Para as tabelas com dimensão maior, foi utilizado o teste Qui-Quadrado de independência.
+
+\begin{table}[H]
+\centering
+\caption{Testes para Independência entre Variáveis Categóricas}
+\begin{tabular}{|cccc|}
+\hline
+\textbf{Teste} & \textbf{Variáveis} & \textbf{P-valor} & \textbf{Decisão do teste} \\ \hline
+Qui-Quadrado & Grau x Procedimento & $\approx 0$   & Rejeita $H_0$  \\ \hline 
+Qui-Quadrado & Procedimento x Originário & $\approx 0$   & Não rejeita $H_0$  \\ \hline  
+Qui-Quadrado & Procedimento x Formato & 0,628   & Não rejeita $H_0$  \\ \hline
+Exato de Fisher & Formato x Grau & 0,307 & Não rejeita $H_0$  \\ \hline
+Exato de Fisher & Formato x Originário & 0,585 & Não rejeita $H_0$  \\ \hline
+Exato de Fisher & Grau x Originário & $\approx 0$   & Rejeita $H_0$  \\ \hline 
+\end{tabular}
+\label{tbl:assoc_categoricas}
+\end{table}
+
+Não há evidências de que a informação sobre o procedimento esteja associada ao processo ser físico ou eletrônico. Apesar disso, a hipótese de independência foi rejeitada entre procedimento e grau, bem como em procedimento e originário. O teste também confirma o que era apontado pela Tabela \ref{tbl:originario_grau}, mostrando evidências de associação entre grau e originário. Para as outras variáveis, não foram encontradas evidências significativas de associação.
+
+
+\subsubsection{Procedimentos}
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição dos tempos até a baixa dos processos segundo o procedimento}
+    \label{fig:procedimentos_tempo}
+    \includegraphics[scale=.9]{imagens/procedimento_tempo.pdf}
+\end{figure}
+
+É notável que os procedimentos de conhecimento tendem a apresentar tempos drasticamente menores que os procedimentos de execução. Os pré-processuais e outros, que apresentaram as menores tendências de tempo entre todos os procedimentos observados.
+
+Além da diferença quantitativa entre as execuções, cada execução apresentou um padrão diferente de dispersão. A execução judicial foi a que menos variou entre os três procedimentos de execução. A execução fiscal não apresentou nenhum outlier e teve o maior valor mediano dentre todos os procedimentos, além de apresentar comportamento assimétrico.
+
+\subsubsection{Indicadores quantitativos}
+Dos 26 indicadores presentes na Tabela Fato, alguns são correlacionados com outras métricas de forma direta \cite{painelestatistica}. Estão entre eles:
+\begin{itemize}
+    \item Total de processos Conclusos para o Magistrado a mais de 50 dias: Está correlacionado com o indicador de Conclusos para o Magistrado.
+    \item Processos sem tramitação há mais de 50 dias: Está correlacionado ao indicador de Tramitando.
+    \item 5\% mais antigos em tramitação: Corresponde a 5\% dos processos no indicador de Tramitando.
+    \item Tramitando (ou Pendentes líquidos): Agrega todos os processos que não receberam Baixa, Suspensão ou Sobrestamento.
+    \item Pendentes: Agregam todos os processos que não receberam Baixa, incluindo Tramitando, Suspensos e Sobrestados.
+    \item Conclusos: Agrega Conclusos para Julgamento, para Despacho, para Admissibilidade recursal, para Decisão, sem especificação e outros.
+    \item Audiências: Agrega Audiências Conciliatórias e Não Conciliatórias.
+\end{itemize}
+
+Em decorrência das correlações, serão escolhidas as métricas que, sozinhas, agregam a maior quantidade de outros indicadores. A exceção a essa regra será o indicador da situação Tramitando, pois, apesar de estar contido entre os Pendentes, a variável resposta (tempo até a baixa) marca o tempo até a primeira situação de Baixa entre os processos com a situação de Tramitando. Assim sendo, os indicadores são: Tramitando, Suspensos e Sobrestados, Conclusos, Julgamentos, Despachos, Decisões, Audiências, Total de liminares deferidas, Total de liminares indeferidas, Casos Novos de Recurso Interno, Recurso Interno Pendente e Recurso Interno Julgado. A Figura \ref{fig:inds_qtd} mostra a quantidade de ocorrências de cada um dos indicadores selecionados. Apesar de o indicador Pendentes não ter sido incluído, a informação completa dele está incluída, uma vez que os Pendentes são a soma de Tramitando, Suspensos e Sobrestados.
+
+\begin{figure}[H]
+    \centering
+    \caption{Quantidade de ocorrências em cada métrica}
+    \includegraphics[scale=.9]{imagens/inds_qtd.pdf}
+    \label{fig:inds_qtd}
+\end{figure}
+
+A quantidade de processos tramitando é a predominante dentre todos os indicadores exibidos. Nos dois indicadores mais frequentes, há um salto entre o primeiro e o segundo, onde o quantitativo de processos tramitando é mais de três vezes superior ao número de suspensos e sobrestados.
+
+Os demais indicadores decaem com poucos saltos, onde os indicadores com menor representação são os de liminares indeferidas e liminares deferidas. Estes, por sua vez, têm uma quantidade de processos pouco maior do que a quantidade de órgãos julgadores. Nota-se que a quantidade de liminares deferidas tem uma média de pouco mais de 1,5 liminares para cada órgão julgador.
+
+
+A Figura \ref{fig:corr_matrix} investiga possíveis correlações das variáveis explicativas entre elas. 
+\begin{figure}[H]
+    \centering
+    \caption{Matriz de correlações entre as variáveis explicativas}
+    \includegraphics[scale=0.8]{imagens/corrplot.pdf}
+    \label{fig:corr_matrix}
+\end{figure}
+
+Não houve nenhuma correlação negativa dentre todas as observadas na matriz, embora haja diversas correlações muito próximas de zero.
+
+Os Casos Novos de Recurso Interno, Recurso Interno Pendente e Recurso Interno Julgado, apesar de não conterem um ao outro (como é o caso de outras variáveis supracitadas), não só se correlacionam pelo fato de tratarem de fenômenos relacionados aos recursos internos, como apresentam uma correlação de moderada a forte (aproximadamente de 0,6), com intensidade próxima para todos eles. O indicador Recurso Interno Julgado apresenta uma correlação ainda mais forte com as variáveis Decisões e Julgamentos, que configuraram, também, as maiores correlações observadas na matriz.
+
+As Decisões e Julgamentos, por sua vez, também estão correlacionadas entre elas com intensidade próxima à de Recursos Internos Julgados. Houve uma intensidade moderada entre os dois indicadores e o quantitativo de Conclusos.
+
+Os dois indicadores de Liminares (deferidas e indeferidas), Audiências, Despachos, Conclusos, Suspensos e Sobrestados, não mostraram correlações fortes com nenhum indicador. Os maiores valores registrados para a correlação das liminares indeferidas foram 0,49 e 0,47, com, respectivamente, as variáveis de Audiências e Liminares deferidas. Os outros indicadores citados, eventualmente, apresentaram correlações moderadas entre eles, onde os Conclusos tiveram a maior de suas correlações com as Decisões e os Despachos tiveram suas maiores correlações com Tramitando e Julgamentos.
+
+O indicador Tramitando, mesmo com maior representatividade dentre todos os indicadores, não apresentou correlação forte com nenhum deles, tendo variado entre fraca e moderada.
+
+Os Suspensos e Sobrestados foram os casos que apresentaram menores correlações com todos os indicadores, com valores maiores que 0,3 apenas quando correlacionados com os Despachos.
+
+\subsubsection{Tempo até a baixa por indicador}
+
+A Figura \ref{fig:cross_charts} mostra diagramas de dispersão de cada variável explicativa contra o tempo até a baixa dos processos. A reta azul indica a reta de regressão quantílica para a mediana, enquanto a reta verde indica a reta de regressão gaussiana para a média.
+
+\begin{figure}[H]
+    \centering
+    \caption{Gráficos de dispersão entre as variáveis explicativas e o tempo até a baixa com retas de regressão quantílica (mediana, em azul) e regressão gaussiana (média, em verde)}
+    \includegraphics[scale=.745]{imagens/cross_charts.png}
+    \label{fig:cross_charts}
+\end{figure}
+
+Na visualização bidimensional, não há, segundo os modelos quantílicos, qualquer indicativo de tendência de decrescimento para o tempo mediano de tramitação dos processos conforme o crescimento de um indicador, de modo que esperam-se coeficientes positivos em quaisquer lugares onde eles sejam não-nulos. Apesar disso, vários dos modelos de regressão por mínimos quadrados apresentaram retas decrescentes, eventualmente podendo levar a valores inferiores a zero, sendo eles: Conclusos, julgamentos, decisões, audiências, liminares deferidas, liminares indeferidas, casos novos de recurso interno, recurso interno pendente e recurso interno julgado, de modo que não só a reta mediana e a reta média não coincidem, como se contradizem. Nota-se que a regressão gaussiana é mais suscetível à influência de outliers do que a regressão quantílica.
+
+Apesar de, graficamente, os Casos Novos de Recurso Interno aparentarem ter uma menor inclinação, as inclinações estão prejudicadas não só pela escala do eixo X e Y serem diferentes, como também pela presença de outliers nas variáveis explicativas.
+
+Em todos os indicadores, existe uma concentração grande das observações em torno do valores onde a variável explicativa é próxima de zero. Fica notável a presença de vários órgãos julgadores que, apesar de relatarem poucos processos tramitando, levam um tempo significativamente grande para dar baixa nos processos que existem. A Tabela \ref{tbl:caracteristicas_pendentes_tempo_longo} exibe características das varas com menos de 120 processos pedentes e tempo até a baixa maior que 1.000 dias. 
+
+\begin{table}[ht]
+\centering
+\caption{Características das varas com menos de 120 processos tramitando e mais de 1.000 dias de tempo até a baixa}
+\begin{tabular}{llllrr}
+  \hline
+  Formato & Grau & Originário & Procedimento & Ocorrências & Tempo \\ 
+  \hline
+  Eletrônico & 1º & Originário & Execução fiscal & 290 & 4.131 \\ 
+  Eletrônico & 1º & Originário & Execução extrajudicial não fiscal & 105 & 3.291 \\ 
+  Eletrônico & 2º & Originário & Conhecimento não criminal &  20 & 1.454 \\ 
+  Eletrônico & 2º & Recursal & Conhecimento não criminal &  16 & 1.719 \\ 
+  Eletrônico & 1º & Originário & Conhecimento não criminal &   7 & 1.394 \\ 
+  Eletrônico & 1º & Originário & Outros &   3 & 4.199 \\ 
+  Físico &     1º & Originário & Conhecimento não criminal &   3 & 10.936 \\ 
+  Eletrônico & 1º & Originário & Execução judicial &   1 & 1.404 \\ 
+  Físico &     1º & Originário & Execução judicial &   1 & 2.290 \\ 
+   \hline
+\end{tabular}
+\label{tbl:caracteristicas_pendentes_tempo_longo}
+\end{table}
+
+A Tabela \ref{tbl:caracteristicas_pendentes_tempo_longo} mostra que, das varas com menos de 120 processos tramitando e com tempo até a baixa acima de 1.000 dias, 395 (88,56\%) delas estão entre os processos eletrônicos de primeiro grau, originários, com procedimento de execução (fiscal e extrajudicial não fiscal). Esse comportamento está dentro do  esperado, uma vez que, como já observado na Figura \ref{fig:procedimentos_tempo}, os dois procedimentos citados possuem tanto maiores tempos até a baixa quanto maior dispersão nesses tempos, bem como os processos originários e de primeiro grau.
+
+Poucas ocorrências relatavam processos físicos, mas das que relatavam, há três varas com processos físicos cujo tempo até a baixa foi de quase 11.000 dias, que foi o maior valor registrado na tabela. Essas três tinham procedimento de conhecimento não criminal, que foi o único procedimento de conhecimento relatado nos grupos observados, e também o procedimento de conhecimento com maiores tempos até a baixa (Figura \ref{fig:procedimentos_tempo})
+
+A Figura \ref{fig:cross_charts_without_outliers} exibe os mesmos diagramas de dispersão, com a remoção dos outliers tanto das variáveis explicativas e remoção das quatro categorias da tabela \ref{tbl:caracteristicas_pendentes_tempo_longo} que apresentaram os maiores tempos até a baixa. A reta azul indica a reta de regressão quantílica para a mediana, enquanto a reta verde indica a reta de regressão gaussiana para a média.
+
+\begin{figure}[H]
+    \centering
+    
+    \caption{Gráficos de dispersão entre as variáveis explicativas e o tempo até a baixa com retas de regressão quantílica (mediana, em azul) e regressão gaussiana (média, em verde), com remoção de outliers}
+    \includegraphics[scale=.74]{imagens/cross_charts_without_outliers.png}
+    \label{fig:cross_charts_without_outliers}
+\end{figure}
+
+Com a remoção das categorias supracitadas, todas as contradições de tendência entre as médias e as medianas sumiram para todas as variáveis explicativas observadas. Ainda, até mesmo a proximidade das retas aumentou, fornecendo valores, visualmente, muito próximos entre elas.
+
+Outro comportamento que diferiu com a remoção das categorias foi a tendência estritamente crescente da mediana. Agora, as liminares (deferidas e indeferidas), e recursos internos (novos, pendentes e julgados) apresentaram retas medianas decrescentes.
+
+As audiências, liminares e recursos internos ainda apresentam dispersão maior dos tempos até a baixa para valores pequenos das variáveis explicativas, bem como tempos propriamente ditos consideravelmente maiores onde os valores das variáveis explicativas eram próximos de zero. O comportamento delas é não-linear, e elas possuem uma amplitude muito pequena quando comparadas às outras seis variáveis.
+
+\newpage
+\subsection{Modelagem}
+\subsubsection{Modelos de regressão quantílica sem interações}
+Para a construção dos modelos, foram considerados os quantis de nível de 10\%, 25\%, 50\%, 75\% e 90\%.
+
+Os primeiros modelos tiveram a seleção de variáveis baseada unicamente no procedimento automático \textit{stepwise} bidirecional. A Tabela 
