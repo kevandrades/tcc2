@@ -77,10 +77,15 @@ Analogamente, podemos reduzir o problema da regressão quantílica a um problema
 \end{equation}
 
 
-Seja $Q_\tau(Y | X)$ a função de quantil condicional, com Y sendo uma variável aleatória dependente e X conhecido. Seja $\beta$ um vetor de funções de $\tau$ que multiplicam as variáveis explicativas. É possível demonstrar que
+Seja $Q_\tau(Y | X)$ a função de quantil condicional, com Y sendo uma variável aleatória dependente e X conhecido. Seja $\beta$ um vetor de funções de $\tau$ que multiplicam as variáveis explicativas. É possível demonstrar que, resolvido o problema de otimização, obtém-se uma expressão da forma
 
 \begin{equation}
-Q_\tau(Y | X) = \beta_0(\tau) + x_1 \beta_1(\tau) + \dots + x_n \beta_n(\tau) 
+Q_\tau(Y | X) = \beta_0(\tau) + x_1 \beta_1(\tau) + \dots + x_n \beta_n(\tau)  = {\beta} (\tau) \mathbf{x}
 \end{equation}
 
-\noindent resolve o problema de otimização \cite{koenker2005}.
+\noindent onde cada $x_{i}$, com $i \in \{1, ..., n\}$, é uma variável explicativa, e $Q_\tau(Y | X)$ é o quantil condicional $\tau$ de $Y$ dado $X$  \cite{koenker2005}.
+
+Se a variação do $\beta(\tau)$ for pequena em função de $\tau$, significa que os erros são identicamente distribuídos, tornando a abordagem de regressão quantílica desnecessária, uma vez que a mesma solução poderia ser modelada a partir de uma regressão linear clássica usando menos recurso computacional. A abordagem quantílica, portanto, se torna faz mais necessária em casos heteroscedásticos, com os quais a regressão linear não teria seus pressupostos satisfeitos.
+
+\subsubsection{Intervalos de confiança para os coeficientes do modelo de regressão quantílica}
+A construção de intervalos de confiança será utilizada na 
