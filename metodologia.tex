@@ -3,16 +3,16 @@
 
 A Base Nacional de Dados do Poder Judiciário (DataJud) é uma fonte primária que centraliza todos os dados referentes a processos judiciais, englobando tanto processos públicos quanto processos sigilosos, bem como físicos e eletrônicos \cite{datajud}. Os dados a serem utilizados neste projeto são todos oriundos do DataJud, dentre os quais a principal fonte será a Tabela Fato, que alimenta o Painel de Estatísticas do Poder Judiciário \cite{painelestatistica}.
 
-Embora o DataJud contenha dados de processos sigilosos, a Tabela Fato agrega esses dados, removendo o nível de processo, de modo que nenhum processo possa ser identificado de forma individual. Esses dados são atualizados mensalmente, e disponibilizados publicamente pelo Conselho Nacional de Justiça.
+Embora o DataJud contenha dados de processos sigilosos, a Tabela Fato agrega esses dados, removendo o nível de processo, de modo que nenhum processo possa ser identificado de forma individual. Esses dados são atualizados constantemente, e disponibilizados publicamente pelo Conselho Nacional de Justiça.
 
-A Tabela Fato utilizada compreende desde o início de 2021 até janeiro de 2024. Todas as análises de evolução de indicadores ao longo do tempo considerarão este período. Todavia, quaisquer avaliações que não envolvam evolução ao longo do tempo considerarão apenas o mês mais recente disponível, que representa as condições do Poder Judiciário no momento atual.
+A Tabela Fato utilizada compreende desde o início de 2021 até janeiro de 2024. Todas as análises de evolução de indicadores ao longo do tempo considerarão este período. Todavia, quaisquer avaliações que não envolvam evolução ao longo do tempo considerarão apenas o mês mais recente disponível, que representa as condições do Poder Judiciário no momento em que os dados foram obtidos.
 
 Com o período completo, a tabela para a Justiça do Trabalho possui 566.196 linhas. Filtrando o período para a data mais recente, esse número cai para 14.045 linhas.
 
 Os níveis de agregação da Tabela Fato são:
     
 \begin{itemize}
-    \item Grau de Jurisdição: Instância em que o processo está em tramitação;
+    \item Grau de Jurisdição: Grau em que o processo está ou esteve em tramitação;
     \item Formato: Se físico ou eletrônico;
     \item Procedimento:
     \begin{itemize}
@@ -32,6 +32,4 @@ São disponíveis 26 indicadores para cada um desses níveis de agregação, que
     
 \end{itemize}
 
-Algumas dessas métricas serão usadas para a construção do modelo preditivo. As variáveis explicativas serão as características da vara de justiça e dos processos, tais como grau de jurisdição, quantidade de processos eletrônicos, quantidade de processos pendentes e número de servidores em dado período do tempo. A variável resposta, por sua vez, será o indicador agregado de número 16, que representa o tempo médio entre o início do processo e a baixa, em dias. Esse tempo é representado como uma média devido à natureza agregada dos dados. Ao longo do trabalho, essa variável será referenciada como "tempo até a baixa".
-
-Por fim, será definida uma métrica de produtividade inversamente proporcional ao tempo até a baixa do processo, relativa às varas com características semelhantes. Assim sendo, quanto menor for o tempo até a baixa, dadas as características da vara de justiça, maior será a produtividade.
+Algumas dessas métricas serão usadas para a construção do modelo preditivo. As variáveis explicativas serão as características da vara de justiça e dos processos, tais como grau de jurisdição, quantidade de processos eletrônicos e a quantidade de processos pendentes. A variável resposta, por sua vez, será o indicador agregado de número 16, que representa o tempo médio entre o início do processo e a baixa, em dias. Esse tempo é representado como uma média devido à natureza agregada dos dados. Ao longo do trabalho, essa variável será referenciada como "tempo até a baixa".
